@@ -1,0 +1,29 @@
+Pyrmd, short for pyramid
+- lang revolved around numbers
+- can convert ints to strings
+- ' character auto converts a variable value to ascii
+- NULL vars are seen as 0
+
+has:
+int
+byte
+bin (bool)
+array (int[], byte[], bin[])
+void (for functions)
+
+---- test ----
+@ this is a comment
+@ yeah, it pretty cool
+@ test program under me
+
+int a -> 3;
+int[] b -> "abcd 123";
+
+int test -> (int c, int d) {
+	print('a + " " + b + " ");
+	return 1;
+}
+
+void bean -> (int[] e) {
+	print(e);
+}

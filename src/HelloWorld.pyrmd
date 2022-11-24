@@ -1,0 +1,7 @@
+int a -> 3;
+int b -> 6;
+
+int[] c -> "Hello World";
+
+print('(a + b));
+print(c);
