@@ -27,3 +27,4 @@ int test -> (int c, int d) {
 void bean -> (int[] e) {
 	print(e);
 }
+

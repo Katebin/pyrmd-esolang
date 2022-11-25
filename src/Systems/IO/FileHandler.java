@@ -24,6 +24,7 @@ public class FileHandler {
 
         while(scanner.hasNextLine()) {
             fileContents += scanner.nextLine();
+            fileContents += "\n"; // add back new lines
         }
 
         return fileContents;
