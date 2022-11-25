@@ -12,9 +12,9 @@ array (int[], byte[], bin[])
 void (for functions)
 
 ---- test ----
-@ this is a comment
-@ yeah, it pretty cool
-@ test program under me
+@ this is a comment @
+@ yeah, it pretty cool @
+@ test program under me @
 
 int a -> 3;
 int[] b -> "abcd 123";

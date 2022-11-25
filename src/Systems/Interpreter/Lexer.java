@@ -3,42 +3,30 @@ import java.util.ArrayList;
 
 public class Lexer {
     // I am a lexer, I speak for the lexemes
-    private char[] rawSeparators = new char[] {' ', '\n', '\t', ',', '.', '{', '}', '(', ')', '[', ']',';', '\'', '"'};
+    private char[] rawSeparators = new char[] {' ', '\n', '\t', ',', '.', '{', '}', '(', ')', '[', ']',';', '\''};
     public Lexer() {}
-
-    private boolean isDigit(char character) {
-        // check if char is a digit, no import
-        switch(character) {
-            case '0':
-                return true;
-            case '1':
-                return true;
-            case '2':
-                return true;
-            case '3':
-                return true;
-            case '4':
-                return true;
-            case '5':
-                return true;
-            case '6':
-                return true;
-            case '7':
-                return true;
-            case '8':
-                return true;
-            case '9':
-                return true;
-            default:
-                return false;
-        }
-    }
 
     private boolean isNumber(String lexeme) {
         // check if a string is a number
         int checks = 0;
         for(int charNum = 0; charNum < lexeme.length(); charNum++) {
-            if(isDigit(lexeme.charAt(charNum)) == true) {
+            if(Character.isDigit(lexeme.charAt(charNum)) == true) {
+                checks += 1;
+            }
+        }
+
+        if(checks == lexeme.length()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isAlphaNumeric(String lexeme) {
+        // check if the provided string is alphanumeric, needed for identifiers
+        int checks = 0;
+        for(int charNum = 0; charNum < lexeme.length(); charNum++) {
+            if(Character.isDigit(lexeme.charAt(charNum)) | Character.isAlphabetic(lexeme.charAt(charNum))) {
                 checks += 1;
             }
         }
@@ -82,20 +70,44 @@ public class Lexer {
                         } else {
                             lexemes.add(String.valueOf(currentCharacter));
                         }
+                        break;
+
                     } else if(currentCharacter == '@') {
                         // switch to handle comments, ignores tokens
                         currentState = 1;
+                        break;
+
+                    } else if(currentCharacter == '"') {
+                        // switch to handle comments
+                        if (charCache.length() > 0) { // avoid sad appends
+                            lexemes.add(charCache);
+                        }
+
+                        currentState = 2;
+                        charCache = "\""; // reset cache
+                        break;
+
+                    } else {
+                        charCache += currentCharacter;
+                        break;
+                    }
+
+                case 1: // comment state
+                    if(currentCharacter == '@') {
+                        currentState = 0; // switch back to default
+                    }
+                    break;
+
+                case 2: // string state
+                    if(currentCharacter == '"') {
+                        lexemes.add(charCache + currentCharacter);
+                        charCache = "";
+                        currentState = 0;
 
                     } else {
                         charCache += currentCharacter;
                     }
-
-                case 1: // comment state
-                    if(currentCharacter == '\n') {
-                        currentState = 0; // switch back to default
-                    } else {
-                        continue; // skip chars
-                    }
+                    break;
             }
         }
 
@@ -155,9 +167,6 @@ public class Lexer {
                     break;
 
                 // string tools
-                case "\"":
-                    tokens.add(Token.DOUBLE_QUOTE);
-                    break;
                 case "'":
                     tokens.add(Token.SINGLE_QUOTE);
                     break;
@@ -165,6 +174,9 @@ public class Lexer {
                 // symbols
                 case ";":
                     tokens.add(Token.SEMICOLON);
+                    break;
+                case ",":
+                    tokens.add(Token.COMMA);
                     break;
                 case "(":
                     tokens.add(Token.L_PAREN);
@@ -185,12 +197,16 @@ public class Lexer {
                     tokens.add(Token.R_CURL);
                     break;
 
-                // handle identifiers and numbers
+                // handle identifiers, strings and numbers
                 default:
                     if(isNumber(suspect) == true) {
                         tokens.add(Token.NUMBER);
-                    } else {
+                    } else if(suspect.charAt(0) == '"' & suspect.charAt(suspect.length() - 1) == '"') { // should not go out of range as length is always > 0
+                        tokens.add(Token.STRING);
+                    } else if(isAlphaNumeric(suspect) == true){
                         tokens.add(Token.IDENTIFIER);
+                    } else { // handle unknown tokens
+                        tokens.add(Token.UNKNOWN);
                     }
 
                     break;

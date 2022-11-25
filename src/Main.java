@@ -10,10 +10,9 @@ public class Main {
         Console console = new Console();
         Lexer lexer = new Lexer();
 
-        //ArrayList<Token> debugTokens = lexer.tokenize(lexer.smartSplit(file.read())); // grab tokens
-        ArrayList<String> tokens = lexer.smartSplit(file.read());
-
-        for(String lineToken : tokens) {
+        // debugging
+        ArrayList<Token> tokens = lexer.tokenize(lexer.smartSplit(file.read()));// grab tokens
+        for(Token lineToken : tokens) {
             console.println(lineToken.toString()); // print one per line
         }
     }

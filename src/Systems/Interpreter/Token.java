@@ -17,11 +17,12 @@ public enum Token {
     DIVIDE(),
 
     // String tools
-    DOUBLE_QUOTE(),
+    STRING(),
     SINGLE_QUOTE(),
 
     // symbols
     SEMICOLON(),
+    COMMA(),
     L_PAREN(),
     R_PAREN(),
     L_BRACK(),
@@ -32,4 +33,5 @@ public enum Token {
     // Specials
     INDENT(),
     NEW_LINE(),
+    UNKNOWN()
 }

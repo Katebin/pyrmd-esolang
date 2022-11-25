@@ -1,7 +1,8 @@
-int 34a3 -> 3; @ number identifiers are accepted, yes its weird
+int 34a3 -> 3; @ number identifiers are accepted, yes its weird but intended@
 int b -> 6;
 
 int[] c -> "Hello World";
+int[] d -> 1, 2, 3;
 
 print('(a + b));
 print(c);
