@@ -22,8 +22,8 @@ define multiline code in its functions.
 | Comment end        | @  | signifies the end of a multiline comment       |
 | Addition Op        | +  | used to add 2 values                   |
 | Subtraction Op     | -  | used to subtract 2 values                      |
-| Multiplication Op  | +  | used to multiply 2 values               |
-| Division Op        | +  | used to divide 2 values                |
+| Multiplication Op  | *  | used to multiply 2 values               |
+| Division Op        | /  | used to divide 2 values                |
 | Value to string Op | '  | shifts a value to ascii (req start)            |
 | String Op          | "  | shifts letters to ascii values (req start & back) |
 | value Separator    | ,  | separates vlaues, used in arguments and arrays |
