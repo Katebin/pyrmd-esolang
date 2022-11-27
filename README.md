@@ -12,19 +12,19 @@ somewhat painful to program in, afterall this is an esolang 👍.
 Pyramid utlizes similar operators to many other languages. Pyramid utlizes curly braces to
 define multiline code in its functions.
 
-| Name  | Operator | Use Case|
-| ------------- | ------------- | ------------- |
-| Define  | -> |  defines a function |
-| Is equal to  | =  |  logical comparison operator |
-| Is not equal to  | !=  | inverse logical comparison operator |
-| End statment  | ;  |  ends a piece of code |
-| Comment start  | @  | starts a mutliline comment |
-| Comment end  | @  |  signifies the end of a multiline comment |
-| Addition Op  | +  |  used to add to values together |
-| Subtraction Op  | -  |  used to subtract 2 values |
+| Name               | Operator | Use Case|
+|--------------------| ------------- | ------------- |
+| Define             | -> |  defines a function |
+| Is equal to        | =  |  logical comparison operator |
+| Is not equal to    | !=  | inverse logical comparison operator |
+| End statment       | ;  |  ends a piece of code |
+| Comment start      | @  | starts a mutliline comment |
+| Comment end        | @  |  signifies the end of a multiline comment |
+| Addition Op        | +  |  used to add to values together |
+| Subtraction Op     | -  |  used to subtract 2 values |
 | Value to string Op | '  |  shifts a value to ascii (req start)|
-| String op | "  |  shifts letters to ascii values (req start & back) |
-| value Separator | ,  |  separates vlaues, used in arguments and arrays |
+| String Op          | "  |  shifts letters to ascii values (req start & back) |
+| value Separator    | ,  |  separates vlaues, used in arguments and arrays |
 
 | Type  | Keyword
 | ------------- | ------------- | 
@@ -63,6 +63,15 @@ void myFirstLogic -> 1 != 2 {
 }
 
 myFirstLogic; @ you dont need parens all the time (: @
+```
+
+### Variables behind the scenes ###
+```
+@ what's the user sees (is a shortcut) @
+int a -> 3;
+
+@ what really is happening @
+int a -> {return 3;}
 ```
 
 ## Contributing ##

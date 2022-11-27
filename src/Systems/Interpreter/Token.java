@@ -9,12 +9,7 @@ public enum Token {
 
     // operators
     DEFINE(),
-    EQUALS(),
-    NOT_EQUALS(),
-    PLUS(),
-    MINUS(),
-    TIMES(),
-    DIVIDE(),
+    OPERATOR(),
 
     // String tools
     STRING(),
@@ -33,5 +28,6 @@ public enum Token {
     // Specials
     INDENT(),
     NEW_LINE(),
+    RETURN(),
     UNKNOWN()
 }

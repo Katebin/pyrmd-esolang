@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Lexer {
     // I am a lexer, I speak for the lexemes
-    private char[] rawSeparators = new char[] {' ', '\n', '\t', ',', '.', '{', '}', '(', ')', '[', ']',';', '\''};
+    private final char[] rawSeparators = new char[] {' ', '\n', '\t', ',', '.', '{', '}', '(', ')', '[', ']',';', '\''};
     public Lexer() {}
 
     private boolean isNumber(String lexeme) {
@@ -49,7 +49,7 @@ public class Lexer {
         return false;
     }
 
-    public ArrayList<String> smartSplit(String source) {
+    private ArrayList<String> smartSplit(String source) {
         // split the source code into potential lexemes
         ArrayList<String> lexemes = new ArrayList<String>(); // stores source
         String charCache = ""; // stores characters
@@ -118,7 +118,7 @@ public class Lexer {
         return lexemes;
     }
 
-    public ArrayList<Token> tokenize (ArrayList<String> lexemes) {
+    private ArrayList<Token> tokenize (ArrayList<String> lexemes) {
         ArrayList<Token> tokens = new ArrayList<Token>();
 
         // scan and tokenize lexemes
@@ -129,7 +129,7 @@ public class Lexer {
                 case " ":
                     break; // do not tokenize spaces
                 case "\n":
-                    tokens.add(Token.NEW_LINE);
+                    //tokens.add(Token.NEW_LINE);
                     break;
                 case "\t":
                     tokens.add(Token.INDENT);
@@ -148,27 +148,22 @@ public class Lexer {
                     tokens.add(Token.DEFINE);
                     break;
                 case "=":
-                    tokens.add(Token.EQUALS);
-                    break;
                 case "!=":
-                    tokens.add(Token.NOT_EQUALS);
-                    break;
                 case "+":
-                    tokens.add(Token.PLUS);
-                    break;
                 case "-":
-                    tokens.add(Token.MINUS);
-                    break;
                 case "*":
-                    tokens.add(Token.TIMES);
-                    break;
                 case "/":
-                    tokens.add(Token.DIVIDE);
+                    tokens.add(Token.OPERATOR);
                     break;
 
                 // string tools
                 case "'":
                     tokens.add(Token.SINGLE_QUOTE);
+                    break;
+
+                // function tools
+                case "return":
+                    tokens.add(Token.RETURN);
                     break;
 
                 // symbols
@@ -212,6 +207,15 @@ public class Lexer {
                     break;
             }
         }
+
+        return tokens;
+    }
+
+    public Token[] lex(String source) {
+        // do everything in the lexer neatly
+        // convert to normal, immutable array
+        ArrayList<Token> oldTokens = tokenize(smartSplit(source));
+        Token[] tokens = oldTokens.toArray(new Token[oldTokens.size()]);
 
         return tokens;
     }
