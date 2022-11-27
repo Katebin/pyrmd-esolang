@@ -12,19 +12,21 @@ somewhat painful to program in, afterall this is an esolang 👍.
 Pyramid utlizes similar operators to many other languages. Pyramid utlizes curly braces to
 define multiline code in its functions.
 
-| Name               | Operator | Use Case|
-|--------------------| ------------- | ------------- |
-| Define             | -> |  defines a function |
-| Is equal to        | =  |  logical comparison operator |
-| Is not equal to    | !=  | inverse logical comparison operator |
-| End statment       | ;  |  ends a piece of code |
-| Comment start      | @  | starts a mutliline comment |
-| Comment end        | @  |  signifies the end of a multiline comment |
-| Addition Op        | +  |  used to add to values together |
-| Subtraction Op     | -  |  used to subtract 2 values |
-| Value to string Op | '  |  shifts a value to ascii (req start)|
-| String Op          | "  |  shifts letters to ascii values (req start & back) |
-| value Separator    | ,  |  separates vlaues, used in arguments and arrays |
+| Name               | Operator | Use Case                                       |
+|--------------------| ------------- |------------------------------------------------|
+| Define             | -> | defines a function                             |
+| Is equal to        | =  | logical comparison operator                    |
+| Is not equal to    | !=  | inverse logical comparison operator            |
+| End statment       | ;  | ends a piece of code                           |
+| Comment start      | @  | starts a mutliline comment                     |
+| Comment end        | @  | signifies the end of a multiline comment       |
+| Addition Op        | +  | used to add 2 values                   |
+| Subtraction Op     | -  | used to subtract 2 values                      |
+| Multiplication Op  | +  | used to multiply 2 values               |
+| Division Op        | +  | used to divide 2 values                |
+| Value to string Op | '  | shifts a value to ascii (req start)            |
+| String Op          | "  | shifts letters to ascii values (req start & back) |
+| value Separator    | ,  | separates vlaues, used in arguments and arrays |
 
 | Type  | Keyword
 | ------------- | ------------- | 
