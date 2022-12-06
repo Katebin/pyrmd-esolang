@@ -1,22 +1,20 @@
 import Systems.IO.Console;
 import Systems.IO.FileHandler;
 import Systems.Interpreter.Lexer;
-import Systems.Interpreter.Parser;
-import Systems.Interpreter.Token;
+import Systems.Interpreter.Tokens.ValueToken;
 
 public class Main {
     public static void main(String[] args) {
         FileHandler file = new FileHandler("src\\HelloWorld.pyrmd");
         Console console = new Console();
         Lexer lexer = new Lexer();
-        Parser parser = new Parser();
 
         // debugging
-        Token[] tokens = lexer.lex(file.read());// grab tokens
-        for(Token lineToken : tokens) {
-            console.println(lineToken.toString()); // print one per line
+        ValueToken[] tokens = lexer.lex(file.read());// grab tokens
+        for(ValueToken lineToken : tokens) {
+            console.println(lineToken.type.toString()); // print one per line
         }
 
-        console.println("Grammatical Status: " + Boolean.toString(parser.isExpression(tokens)));
+        //console.println("Grammatical Status: " + Boolean.toString(parser.isExpression(tokens)));
     }
 }

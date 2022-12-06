@@ -1,4 +1,6 @@
 package Systems.Interpreter;
+import Systems.Interpreter.Tokens.Token;
+import Systems.Interpreter.Tokens.ValueToken;
 import java.util.ArrayList;
 
 public class Lexer {
@@ -118,104 +120,88 @@ public class Lexer {
         return lexemes;
     }
 
-    private ArrayList<Token> tokenize (ArrayList<String> lexemes) {
-        ArrayList<Token> tokens = new ArrayList<Token>();
+    private ArrayList<ValueToken> tokenize (ArrayList<String> lexemes) {
+        // tokenize the lexemes for further processing
+        ArrayList<ValueToken> tokens = new ArrayList<ValueToken>();
 
-        // scan and tokenize lexemes
-        for(String suspect : lexemes) {
-            //System.out.println(suspect);
-            switch(suspect) {
-                // separators
-                case " ":
-                    break; // do not tokenize spaces
-                case "\n":
-                    //tokens.add(Token.NEW_LINE);
-                    break;
-                case "\t":
-                    tokens.add(Token.INDENT);
-                    break;
-
-                // base types
+        for(String lexeme : lexemes) {
+            switch(lexeme) {
+                // types
                 case "int":
-                    tokens.add(Token.INT);
-                    break;
                 case "void":
-                    tokens.add(Token.VOID);
+                    tokens.add(new ValueToken(lexeme, Token.LITERAL));
                     break;
 
-                // operators
-                case "->":
-                    tokens.add(Token.DEFINE);
-                    break;
-                case "=":
-                case "!=":
+                // math operators
                 case "+":
                 case "-":
                 case "*":
                 case "/":
-                    tokens.add(Token.OPERATOR);
+                    tokens.add(new ValueToken(lexeme, Token.MATH_OP));
                     break;
 
-                // string tools
-                case "'":
-                    tokens.add(Token.SINGLE_QUOTE);
+                // logic operators
+                case "=":
+                case "!=":
+                    tokens.add(new ValueToken(lexeme, Token.LOGIC_OP));
                     break;
 
-                // function tools
+                // keywords
                 case "return":
-                    tokens.add(Token.RETURN);
+                    tokens.add(new ValueToken(lexeme, Token.RETURN));
                     break;
 
                 // symbols
                 case ";":
-                    tokens.add(Token.SEMICOLON);
+                    tokens.add(new ValueToken(lexeme, Token.SEMICOLON));
                     break;
                 case ",":
-                    tokens.add(Token.COMMA);
+                    tokens.add(new ValueToken(lexeme, Token.COMMA));
+                    break;
+                case "->":
+                    tokens.add(new ValueToken(lexeme, Token.DEFINE_OP));
                     break;
                 case "(":
-                    tokens.add(Token.L_PAREN);
+                    tokens.add(new ValueToken(lexeme, Token.L_PAREN));
                     break;
                 case ")":
-                    tokens.add(Token.R_PAREN);
-                    break;
-                case "[":
-                    tokens.add(Token.L_BRACK);
-                    break;
-                case "]":
-                    tokens.add(Token.R_BRACK);
+                    tokens.add(new ValueToken(lexeme, Token.R_PAREN));
                     break;
                 case "{":
-                    tokens.add(Token.L_CURL);
+                    tokens.add(new ValueToken(lexeme, Token.L_CURL));
                     break;
                 case "}":
-                    tokens.add(Token.R_CURL);
+                    tokens.add(new ValueToken(lexeme, Token.R_CURL));
+                    break;
+                case "[":
+                    tokens.add(new ValueToken(lexeme, Token.L_BRACK));
+                    break;
+                case "]":
+                    tokens.add(new ValueToken(lexeme, Token.R_BRACK));
                     break;
 
-                // handle identifiers, strings and numbers
+                // specials
                 default:
-                    if(isNumber(suspect) == true) {
-                        tokens.add(Token.NUMBER);
-                    } else if(suspect.charAt(0) == '"' & suspect.charAt(suspect.length() - 1) == '"') { // should not go out of range as length is always > 0
-                        tokens.add(Token.STRING);
-                    } else if(isAlphaNumeric(suspect) == true){
-                        tokens.add(Token.IDENTIFIER);
+                    if(isNumber(lexeme) == true) {
+                        tokens.add(new ValueToken(lexeme, Token.NUMBER));
+                    } else if(lexeme.charAt(0) == '"' & lexeme.charAt(lexeme.length() - 1) == '"') { // should not go out of range as length is always > 0
+                        tokens.add(new ValueToken(lexeme, Token.STRING));
+                    } else if(isAlphaNumeric(lexeme) == true){
+                        tokens.add(new ValueToken(lexeme, Token.IDENTIFIER));
                     } else { // handle unknown tokens
-                        tokens.add(Token.UNKNOWN);
+                        // throw error
                     }
 
                     break;
             }
         }
-
         return tokens;
     }
 
-    public Token[] lex(String source) {
-        // do everything in the lexer neatly
-        // convert to normal, immutable array
-        ArrayList<Token> oldTokens = tokenize(smartSplit(source));
-        Token[] tokens = oldTokens.toArray(new Token[oldTokens.size()]);
+    public ValueToken[] lex(String source) {
+        // convert the final array lists to an immutable array
+        ArrayList<ValueToken> oldTokens = tokenize(smartSplit(source));
+        ValueToken[] tokens = oldTokens.toArray(new ValueToken[oldTokens.size()]);
 
         return tokens;
     }
