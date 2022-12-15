@@ -1,11 +1,11 @@
-package Systems.IO;
+package framework.io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileHandler {
-    // handles files ONLY IN JAVA, read / write
-    // sole purpose is to ease my suffering
+    // handles files, read / write
+    // sole purpose is to ease suffering
     private File file;
     private Scanner scanner;
 

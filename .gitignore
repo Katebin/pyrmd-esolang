@@ -1,6 +1,7 @@
-### Katebin ###
+### User ###
 pyrmdIdeas.txt
-.idea/
+.idea
+.out
 
 ### IntelliJ IDEA ###
 out/
