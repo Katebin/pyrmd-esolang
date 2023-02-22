@@ -1,4 +1,5 @@
-package Systems.IO;
+package systems.io;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

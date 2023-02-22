@@ -1,4 +1,5 @@
-package Systems.IO;
+package systems.io;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
